@@ -5,7 +5,7 @@ There is no package on official alpine repositories yet. For testing purposes yo
 **Please note - it will only work on Alpine 3.11 or above**
 ```Dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine
-RUN apk add --no-cache git curl tini util-linux bash neovim openssl
+RUN apk add --no-cache git curl
 RUN apk add --no-cache make m4 autoconf automake gcc g++ krb5-dev openssl-dev gettext-dev  
 RUN apk add --no-cache libtool libxml2 libxslt libunistring-dev zlib-dev samba-dev
 
