@@ -1,7 +1,7 @@
 # Setting up NTLM auth on dotnet alpine images
 
 ## 1. Obtain ```gssntlmssp.so```
-There is no package yet on official alpine repositories yet. For testing purposes you use on from this repo. To build it from source you can use below Dockerfile. You can replace base image with whatever you are going to use in your app.
+There is no package on official alpine repositories yet. For testing purposes you use one from this repo. To build it from source you can use below Dockerfile. You can replace base image with whatever you are going to use in your dotnet app.
 **Please note - it will only work on Alpine 3.11 or above**
 ```Dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine
@@ -15,7 +15,7 @@ RUN autoreconf -f -i
 RUN ./configure --without-manpages --disable-nls
 RUN make install
 ```
-Once image is ready, just run temporary interactive container and copy **gssntlmssp.so** file (from .libs or /usr/local/lib/gssntlmssp)
+Once image is ready, just run temporary interactive container and copy **gssntlmssp.so** file (from .libs or /usr/local/lib/gssntlmssp) to your local file system
 
 ## 2. Install on other containers/images
 ### 2.1 Make sure you are using Alpine >= 3.11
@@ -25,7 +25,7 @@ Once image is ready, just run temporary interactive container and copy **gssntlm
 ```bash
 apk add libwbclient libunistring libssl1.1 zlib libc6-compat
 ```
-### 2.4 you can test if it work using powershell (comes with dotnetsdk):
+### 2.4 you can test if it works using powershell (comes with dotnet sdk):
 ```Powershell
 irm https://myntlmsite.com -Credential (Get-Credential MyNtlmUser)
 ```
