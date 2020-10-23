@@ -18,7 +18,7 @@ RUN make install
 Once image is ready, just run temporary interactive container and copy **gssntlmssp.so** file (from .libs or /usr/local/lib/gssntlmssp) to your local file system
 
 ## 2. Install on other containers/images
-### 2.1 Make sure you are using Alpine >= 3.11
+### 2.1 Make sure you are using Alpine >= 3.11*
 ### 2.2 copy ```gssntlmssp.so``` to any location (e.g. /usr/local/lib/gssntlmssp)
 ### copy mech.ntlmssp.conf file to /usr/etc/gss/mech.d (make sure it's refering to proper ```gssntlmssp.so``` location)
 ### 2.3 install dependencies - on dotnet sdk images it should be sufficient to add **libwbclient**, at least for webclient. If not - try to add some others:
@@ -45,3 +45,7 @@ RUN cp mech.ntlmssp.conf  /usr/etc/gss/mech.d
 ENTRYPOINT [ "pwsh" ]
 ```
 Start it interactivly and run above powershell test command from above.
+
+ ```*``` You can actualy make it work on 3.10 too by upgrading packages from 3.11 repos
+- in /etc/apk/repositories file change 3.10 to 3.11
+- then run: apk update && apk upgrade
